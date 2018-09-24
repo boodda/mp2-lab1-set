@@ -99,7 +99,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 {
 	if (BitLen!=bf.BitLen) return 0;
 	for (int i=0;i<BitLen;i++){
-		if(GetBit(i)!=bf.GetBit(int)) return 0;
+		if(GetBit(i)!=bf.GetBit(i)) return 0;
 	}
 	return 1;
 }
