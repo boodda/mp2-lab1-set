@@ -99,26 +99,66 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 {
 	if (BitLen!=bf.BitLen) return 0;
 	for (int i=0;i<BitLen;i++){
-		if(pMem[i]!=bf.pMem[i]) return 0;
+		if(GetBit(i)!=bf.GetBit(int)) return 0;
 	}
 	return 1;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 0;
+  return !((*this)==bf);
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
+	const TBitField *max = this;
+	const TBitField *min = &bf;
+	const TBitField* tmp;
+	if (max->BitLen < min->BitLen){
+		tmp = max;
+		max = min;
+		min = tmp;
+	}
+	TBitField res(max->BitLen);
+	for(int i=0;i<min->BitLen;i++){
+		if(min->GetBit(i)||max->GetBit(i)){
+			res.SetBit(i);
+		}
+	}
+	for(int i=min->BitLen;i<max->BitLen;i++){
+		if(max->GetBit(i)){
+			res.SetBit(i);
+		}
+	}
+	return res;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
+	const TBitField *max = this;
+	const TBitField *min = &bf;
+	const TBitField* tmp;
+	if (max->BitLen < min->BitLen){
+		tmp = max;
+		max = min;
+		min = tmp;
+	}
+	TBitField res(max->BitLen);
+	for(int i=0;i<min->BitLen;i++){
+		if(min->GetBit(i)&&max->GetBit(i)){
+			res.SetBit(i);
+		}
+	}
+	return res;
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
+	TBitField res(BitLen);
+	for(int i=0;i<MemLen;i++){
+		res.pMem[i] = ~pMem[i];
+	}
+	return res;
 }
 
 // ввод/вывод
