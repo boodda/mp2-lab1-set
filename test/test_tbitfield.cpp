@@ -151,6 +151,16 @@ TEST(TBitField, compare_equal_bitfields_of_equal_size)
   EXPECT_EQ(bf1, bf2);
 }
 
+TEST(TBitField, can_compare_equal_bitfields)
+{
+  TBitField bf1(35),bf2(35);
+  bf1.SetBit(1);
+  bf2.SetBit(1);
+  bf1.SetBit(34);
+  bf2.SetBit(34);
+  EXPECT_EQ(bf1,bf2);
+}
+
 TEST(TBitField, or_operator_applied_to_bitfields_of_equal_size)
 {
   const int size = 4;
