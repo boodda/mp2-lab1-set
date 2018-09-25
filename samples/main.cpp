@@ -1,12 +1,30 @@
 #include<iostream>
 #include "tbitfield.h"
+#include<cstdlib>
+#include <ctime>
 using namespace std;
+TBitField genRand(){
+	int n = rand()%10000;
+	TBitField res(n);
+	for(int i=0;i<n;i++){
+		if(rand()%3==0){
+			res.SetBit(i);
+		}
+	}
+	return res;
+}
+#define kolvo 100000
 int main(){
-    TBitField bf1(35),bf2(35);
-	  bf1.SetBit(1);
-	  bf2.SetBit(1);
-	  bf1.SetBit(33);
-	  bf2.SetBit(34);
-	cout<<(bf1!=bf2)<<endl;
+	srand(time(0));
+    TBitField bf[kolvo];
+    for(int i=0;i<kolvo;i++){
+    	bf[i] = genRand();
+    }
+  	int start = clock();
+    for(int i=0;i<kolvo/2;i++){
+    	bf[2*i] | bf[2*i+1];
+    }
+    int end = clock();
+    cout << (end - start)<<endl;
     return 0;
 }

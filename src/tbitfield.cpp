@@ -7,6 +7,21 @@
 
 #include "tbitfield.h"
 
+TBitField::TBitField()
+{
+	int len = 1;
+	MemLen = (len+31)>>5;
+	BitLen = len;
+	pMem = new TELEM[MemLen];
+	if(pMem==nullptr){
+		throw "Не хватает памяти";
+	}
+	for(int i=0;i<MemLen;i++){
+		pMem[i]=0;
+	}
+}
+
+
 TBitField::TBitField(int len)
 {
 	if(len<0) throw "Количество бит не может быть отрицательным";
