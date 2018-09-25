@@ -135,15 +135,11 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 		min = tmp;
 	}
 	TBitField res(max->BitLen);
-	for(int i=0;i<min->BitLen;i++){
-		if(min->GetBit(i)||max->GetBit(i)){
-			res.SetBit(i);
-		}
+	for(int i=0;i<min->MemLen;i++){
+		res.pMem[i] = min->pMem[i];
 	}
-	for(int i=min->BitLen;i<max->BitLen;i++){
-		if(max->GetBit(i)){
-			res.SetBit(i);
-		}
+	for(int i=0;i<max->MemLen;i++){
+		res.pMem[i] |= max->pMem[i];
 	}
 	return res;
 }
