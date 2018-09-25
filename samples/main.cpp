@@ -22,7 +22,7 @@ int main(){
     }
   	int start = clock();
     for(int i=0;i<kolvo/2;i++){
-    	bf[2*i] | bf[2*i+1];
+    	bf[2*i] & bf[2*i+1];
     }
     int end = clock();
     cout << (end - start)<<endl;
