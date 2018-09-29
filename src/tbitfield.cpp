@@ -179,6 +179,7 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
@@ -186,5 +187,6 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 	for(int i=0;i<bf.GetLength();i++){
     	ostr<<bf.GetBit(i);
 	}
+	return ostr;
 	
 }
