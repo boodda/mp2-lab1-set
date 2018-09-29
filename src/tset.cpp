@@ -105,8 +105,22 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
+	s = TSet(s.MaxPower);
+	int a;
+	istr>>a;
+	while(a!=-1){
+		s.InsElem(a);
+		istr>>a;
+	}
+	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	for(int i=0;i<s.MaxPower;i++){
+		if(s.IsMember(i)){
+			ostr<<i<<" ";
+		}
+	}
+	return ostr;
 }
