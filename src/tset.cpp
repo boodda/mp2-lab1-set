@@ -117,10 +117,13 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	bool f = true;
 	for(int i=0;i<s.MaxPower;i++){
 		if(s.IsMember(i)){
 			ostr<<i<<" ";
+			f=false;
 		}
 	}
+	if(f) ostr<<"Пустое множество";
 	return ostr;
 }
